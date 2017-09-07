@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="ac3fc387-7ab5-401e-b3ef-a280c5143a75" name="PackageNinja" url="http://172.28.200.108">
+        <fileTransfer host="172.28.200.108" port="22" rootFolder="/var/www/html/moses/vendor/Mossey" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

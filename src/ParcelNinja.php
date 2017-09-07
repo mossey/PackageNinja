@@ -5,17 +5,29 @@ class ParcelNinja{
     public static function sayHi(){
         return "hello";
     }
-    public static function retrieveInbounds(){
+
+    /**
+     * @param $token
+     * @param $orderTypeId
+     * @param $orderTypeId
+     * @param $startDate
+     * @param $endDate
+     * @param $pageSize
+     * @param $page
+     * @param $search
+     * @param $startRange
+     */
+    public static function retrieveInbounds($token, $orderTypeId, $orderTypeId, $startDate, $endDate, $pageSize, $page, $search, $startRange){
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/inbounds/?orderTypeId&startDate&endDate&pageSize&page&search&startRange");
+        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/inbounds/?$orderTypeId,$startDate,$endDate,$pageSize,$page,$search,$startRange");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_HEADER, FALSE);
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             "Content-Type: application/json",
             "Accept: application/json",
-            "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
+            "Authorization: Basic $token"
         ));
 
         $response = curl_exec($ch);
@@ -23,17 +35,22 @@ class ParcelNinja{
 
         var_dump($response);
     }
-    public static function retrieveSpecificInbound(){
+
+    /**
+     * @param $token
+     * @param $id
+     */
+    public static function retrieveSpecificInbound($token, $id){
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/inbounds/id");
+        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/inbounds/$id");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_HEADER, FALSE);
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             "Content-Type: application/json",
             "Accept: application/json",
-            "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
+            "Authorization: Basic $token"
         ));
 
         $response = curl_exec($ch);
@@ -41,10 +58,15 @@ class ParcelNinja{
 
         var_dump($response);
     }
-    public static function deleteInbound(){
+
+    /**
+     * @param $id
+     * @param $token
+     */
+    public static function deleteInbound($id, $token){
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/inbounds/id");
+        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/inbounds/$id");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_HEADER, FALSE);
 
@@ -53,7 +75,7 @@ class ParcelNinja{
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             "Content-Type: application/json",
             "Accept: application/json",
-            "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
+            "Authorization: Basic $token"
         ));
 
         $response = curl_exec($ch);
@@ -62,17 +84,23 @@ class ParcelNinja{
         var_dump($response);
 
     }
-    public static function retrieveInboundWithEvents(){
+
+    /**
+     * @param $token
+     * @param $id
+     * @param $events
+     */
+    public static function retrieveInboundWithEvents($token, $id, $events){
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/inbounds/id/events");
+        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/inbounds/$id/$events");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_HEADER, FALSE);
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             "Content-Type: application/json",
             "Accept: application/json",
-            "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
+            "Authorization: Basic $token"
         ));
 
         $response = curl_exec($ch);
@@ -80,7 +108,11 @@ class ParcelNinja{
 
         var_dump($response);
     }
-    public static function createInboundOrder(){
+
+    /**
+     * @param $token
+     */
+    public static function createInboundOrder($token){
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/inbounds");
@@ -114,153 +146,7 @@ class ParcelNinja{
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             "Content-Type: application/json",
             "Accept: application/json",
-            "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
-        ));
-
-        $response = curl_exec($ch);
-        curl_close($ch);
-
-        var_dump($response);
-    }
-    public static function retrieveOutbounds(){
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/outbounds/?orderTypeId&startDate&endDate&pageSize&page&search&startRange");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        curl_setopt($ch, CURLOPT_HEADER, FALSE);
-
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "Content-Type: application/json",
-            "Accept: application/json",
-            "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
-        ));
-
-        $response = curl_exec($ch);
-        curl_close($ch);
-
-        var_dump($response);
-    }
-    public static function retrieveSpecificOutbound(){
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/outbounds/id");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        curl_setopt($ch, CURLOPT_HEADER, FALSE);
-
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "Content-Type: application/json",
-            "Accept: application/json",
-            "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
-        ));
-
-        $response = curl_exec($ch);
-        curl_close($ch);
-
-        var_dump($response);
-    }
-    public static function deleteOutbound(){
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/outbounds/id");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        curl_setopt($ch, CURLOPT_HEADER, FALSE);
-
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
-
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "Content-Type: application/json",
-            "Accept: application/json",
-            "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
-        ));
-
-        $response = curl_exec($ch);
-        curl_close($ch);
-
-        var_dump($response);
-    }
-    public static function retrieveOutboundWithHistory(){
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/outbounds/id/events");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        curl_setopt($ch, CURLOPT_HEADER, FALSE);
-
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "Content-Type: application/json",
-            "Accept: application/json",
-            "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
-        ));
-
-        $response = curl_exec($ch);
-        curl_close($ch);
-
-        var_dump($response);
-    }
-    public static function createOutbound(){
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/outbounds");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        curl_setopt($ch, CURLOPT_HEADER, FALSE);
-
-        curl_setopt($ch, CURLOPT_POST, TRUE);
-
-        curl_setopt($ch, CURLOPT_POSTFIELDS, "{
-  \"clientId\": \"CO-00001\",
-  \"typeId\": 2,
-  \"deliveryInfo\": {
-    \"customer\": \"John Doe\",
-    \"companyName\": \"Parcelninja\",
-    \"contactNo\": \"0123216540\",
-    \"addressLine1\": \"Afrox building\",
-    \"addressLine2\": \"56 Marlboro\",
-    \"suburb\": \"Melrose Arch\",
-    \"postalCode\": \"2196\",
-    \"deliveryOption\": {
-      \"deliveryQuoteId\": 0
-    },
-    \"forCollection\": true
-  },
-  \"items\": [
-    {
-      \"itemNo\": \"SKU-001\",
-      \"qty\": 3
-    }
-  ],
-  \"documents\": [
-    {
-      \"type\": 2,
-      \"name\": \"Name.pdf\",
-      \"url\": \"http://www.pdf995.com/samples/pdf.pdf\",
-      \"printCount\": 1,
-      \"printPlacement\": 0
-    }
-  ]
-}");
-
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "Content-Type: application/json",
-            "Accept: application/json",
-            "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
-        ));
-
-        $response = curl_exec($ch);
-        curl_close($ch);
-
-        var_dump($response);
-    }
-    public static function retrieveFullInventory(){
-
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/inventory/?pageSize&page&search");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        curl_setopt($ch, CURLOPT_HEADER, FALSE);
-
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "Content-Type: application/json",
-            "Accept: application/json",
-            "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
+            "Authorization: Basic $token"
         ));
 
         $response = curl_exec($ch);
@@ -270,19 +156,26 @@ class ParcelNinja{
     }
 
     /**
-     *
+     * @param $token
+     * @param $orderTypeId
+     * @param $startDate
+     * @param $endDate
+     * @param $pageSize
+     * @param $page
+     * @param $search
+     * @param $startRange
      */
-    public static function retrieveSubsetInventory(){
+    public static function retrieveOutbounds($token, $orderTypeId, $startDate, $endDate, $pageSize, $page, $search, $startRange){
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/inbounds/?orderTypeId&startDate&endDate&pageSize&page&search&startRange");
+        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/outbounds/?$orderTypeId&$startDate&$endDate&$pageSize&$page&$search&$startRange");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_HEADER, FALSE);
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             "Content-Type: application/json",
             "Accept: application/json",
-            "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
+            "Authorization: Basic $token"
         ));
 
         $response = curl_exec($ch);
@@ -290,17 +183,22 @@ class ParcelNinja{
 
         var_dump($response);
     }
-    public static function retrieveSingleSku(){
+
+    /**
+     * @param $token
+     * @param $id
+     */
+    public static function retrieveSpecificOutbound($token, $id){
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/inventory/sku");
+        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/outbounds/$id");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_HEADER, FALSE);
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             "Content-Type: application/json",
             "Accept: application/json",
-            "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
+            "Authorization: Basic $token"
         ));
 
         $response = curl_exec($ch);
@@ -308,7 +206,195 @@ class ParcelNinja{
 
         var_dump($response);
     }
-    public static function reserveInventory(){
+
+    /**
+     * @param $token
+     * @param $id
+     */
+    public static function deleteOutbound($token, $id){
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/outbounds/$id");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_HEADER, FALSE);
+
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            "Content-Type: application/json",
+            "Accept: application/json",
+            "Authorization: Basic $token"
+        ));
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        var_dump($response);
+    }
+
+    /**
+     * @param $token
+     * @param $events
+     */
+    public static function retrieveOutboundWithHistory($token, $events){
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/outbounds/id/$events");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_HEADER, FALSE);
+
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            "Content-Type: application/json",
+            "Accept: application/json",
+            "Authorization: Basic $token"
+        ));
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        var_dump($response);
+    }
+
+    /**
+     * @param $token
+     * @param $clientID
+     * @param $typeID
+     * @param $customer
+     * @param $companyName
+     * @param $contactNO
+     * @param $addressLine1
+     * @param $addressLine2
+     * @param $suburb
+     * @param $postalCode
+     * @param $deliveryQuoteID
+     * @param $forCollection //either true or false
+     * @param $items  //in the format [{"itemNo": "SKU-001","qty": 3},{"itemNo": "SKU-002","qty": 4}]
+     * @param $documents // in the format [{"type": 2,"name": "Name.pdf", "url": "http://www.pdf995.com/samples/pdf.pdf","printCount": 1,"printPlacement": 0},{"type": 2,"name": "Name.pdf", "url": "http://www.pdf995.com/samples/pdf.pdf","printCount": 1,"printPlacement": 0}]
+     */
+    public static function createOutbound($token, $clientID, $typeID, $customer, $companyName, $contactNO, $addressLine1, $addressLine2, $suburb, $postalCode, $deliveryQuoteID, $forCollection, $items, $documents){
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/outbounds");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_HEADER, FALSE);
+
+        curl_setopt($ch, CURLOPT_POST, TRUE);
+
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "{
+  \"clientId\": \"$clientID\",
+  \"typeId\": $typeID,
+  \"deliveryInfo\": {
+    \"customer\": \"$customer\",
+    \"companyName\": \"$companyName\",
+    \"contactNo\": \"$contactNO\",
+    \"addressLine1\": \"$addressLine1\",
+    \"addressLine2\": \"$addressLine2\",
+    \"suburb\": \"$suburb\",
+    \"postalCode\": \"$postalCode\",
+    \"deliveryOption\": {
+      \"deliveryQuoteId\": $deliveryQuoteID
+    },
+    \"forCollection\": $forCollection
+  },
+  \"items\":  $items,
+  \"documents\": $documents
+  }");
+
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            "Content-Type: application/json",
+            "Accept: application/json",
+            "Authorization: Basic $token"
+        ));
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        var_dump($response);
+    }
+
+    /**
+     * @param $token
+     * @param $pageSize
+     * @param $page
+     * @param $search
+     */
+    public static function retrieveFullInventory($token, $pageSize, $page, $search){
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/inventory/?$pageSize,$page,$search");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_HEADER, FALSE);
+
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            "Content-Type: application/json",
+            "Accept: application/json",
+            "Authorization: Basic $token"
+        ));
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        var_dump($response);
+    }
+
+
+    /**
+     * @param $token
+     * @param $orderTypeId
+     * @param $startDate
+     * @param $endDate
+     * @param $pageSize
+     * @param $page
+     * @param $search
+     * @param $startRange
+     */
+    public static function retrieveSubsetInventory($token, $orderTypeId, $startDate, $endDate, $pageSize, $page, $search, $startRange){
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/inbounds/?$orderTypeId&$startDate&$endDate&$pageSize&$page&$search&$startRange");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_HEADER, FALSE);
+
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            "Content-Type: application/json",
+            "Accept: application/json",
+            "Authorization: Basic $token"
+        ));
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        var_dump($response);
+    }
+
+    /**
+     * @param $token
+     * @param $sku
+     */
+    public static function retrieveSingleSku($token, $sku){
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/inventory/$sku");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_HEADER, FALSE);
+
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            "Content-Type: application/json",
+            "Accept: application/json",
+            "Authorization: Basic $token"
+        ));
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        var_dump($response);
+    }
+
+    /**
+     * @param $token
+     */
+    public static function reserveInventory($token){
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/inventory/reserve");
@@ -326,7 +412,7 @@ class ParcelNinja{
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             "Content-Type: application/json",
             "Accept: application/json",
-            "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
+            "Authorization: Basic $token"
         ));
 
         $response = curl_exec($ch);
@@ -335,7 +421,20 @@ class ParcelNinja{
         var_dump($response);
 
     }
-    public static function getListOfDeliveryQuotes(){
+
+    /**
+     * @param $token
+     * @param $postalCode
+     * @param $suburb
+     * @param $quantity
+     * @param $sku
+     * @param $width
+     * @param $length
+     * @param $height
+     * @param $weight
+     * @param $quantity2
+     */
+    public static function getListOfDeliveryQuotes($token, $postalCode, $suburb, $quantity, $sku, $width, $length, $height, $weight, $quantity2){
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/delivery/quote");
@@ -346,28 +445,28 @@ class ParcelNinja{
 
         curl_setopt($ch, CURLOPT_POSTFIELDS, "{
         \"deliveryInformation\": {
-        \"postalCode\": \"2196\",
-        \"suburb\": \"Bryanston\"
+        \"postalCode\": \"$postalCode\",
+        \"suburb\": \"$suburb\"
         },
         \"items\": [
-      \"quantity\": 1
+      \"quantity\": $quantity
       },
       {
-      \"sku\": \"testSku\",
+      \"sku\": \"$sku\",
       \"dimensions\": {
-        \"width\": 250,
-        \"length\": 100,
-        \"height\": 200,
-        \"weight\": 800
+        \"width\": $width,
+        \"length\": $length,
+        \"height\": $height,
+        \"weight\": $weight
       },
-      \"quantity\": 1
+      \"quantity\": $quantity2
       }
       ]
       }");
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             "Content-Type: application/json",
             "Accept: application/json",
-            "Authorization: Basic QWxhZGRpbjpvcGVAbjc2FtZQ=="
+            "Authorization: Basic $token"
         ));
 
         $response = curl_exec($ch);
@@ -375,7 +474,20 @@ class ParcelNinja{
 
         var_dump($response);
     }
-    public static function getCheapestDeliveryQuote(){
+
+    /**
+     * @param $token
+     * @param $postalCode
+     * @param $suburb
+     * @param $sku
+     * @param $quantity
+     * @param $length
+     * @param $width
+     * @param $height
+     * @param $weight
+     * @param $fromReserve
+     */
+    public static function getCheapestDeliveryQuote($token, $postalCode, $suburb, $sku, $quantity, $length, $width, $height, $weight, $fromReserve){
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/delivery/quote/cheapest");
@@ -386,20 +498,20 @@ class ParcelNinja{
 
         curl_setopt($ch, CURLOPT_POSTFIELDS, "{
         \"deliveryInformation\": {
-        \"postalCode\": \"2196\",
-        \"suburb\": \"Bryanston\"
+        \"postalCode\": \"$postalCode\",
+        \"suburb\": \"$suburb\"
         },
         \"items\": [
         {
-        \"sku\": \"testSku\",
-        \"quantity\": 1,
+        \"sku\": \"$sku\",
+        \"quantity\": $quantity,
         \"dimensions\": {
-        \"width\": 250,
-        \"length\": 100,
-        \"height\": 200,
-        \"weight\": 800
+        \"width\": $width,
+        \"length\": $length,
+        \"height\": $height,
+        \"weight\": $weight
         },
-        \"fromReserve\": false
+        \"fromReserve\": $fromReserve
         }
         ]
         }");
@@ -407,7 +519,7 @@ class ParcelNinja{
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             "Content-Type: application/json",
             "Accept: application/json",
-            "Authorization: Basic QWxhZGRpbjpvcGVAbjc2FtZQ=="
+            "Authorization: Basic $token"
         ));
 
         $response = curl_exec($ch);
@@ -415,7 +527,13 @@ class ParcelNinja{
 
         var_dump($response);
     }
-    public static function checkDeliveryQuote(){
+
+    /**
+     * @param $token
+     * @param $deliveryQuoteID
+     * @param $nominateDate
+     */
+    public static function checkDeliveryQuote($token, $deliveryQuoteID, $nominateDate){
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/delivery/CheckQuote");
@@ -425,8 +543,8 @@ class ParcelNinja{
         curl_setopt($ch, CURLOPT_POST, TRUE);
 
         curl_setopt($ch, CURLOPT_POSTFIELDS, "{
-        \"deliveryQuoteId\": 942529,
-        \"nominatedDate\": \"2015/06/01T08:38\"
+        \"deliveryQuoteId\": $deliveryQuoteID,
+        \"nominatedDate\": \"$nominateDate/*2015/06/01T08:38*/\"
         }");
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
@@ -440,17 +558,22 @@ class ParcelNinja{
 
         var_dump($response);
     }
-    public static function trackWayBill(){
+
+    /**
+     * @param $token
+     * @param $waybillNO
+     */
+    public static function trackWayBill($token, $waybillNO){
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/tracking/waybillNo");
+        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/tracking/$waybillNO");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_HEADER, FALSE);
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             "Content-Type: application/json",
             "Accept: application/json",
-            "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
+            "Authorization: Basic $token"
         ));
 
         $response = curl_exec($ch);
@@ -458,17 +581,22 @@ class ParcelNinja{
 
         var_dump($response);
     }
-    public static function trackWaybillWithEventHistory(){
+
+    /**
+     * @param $token
+     * @param $waybillNO
+     */
+    public static function trackWaybillWithEventHistory($token, $waybillNO){
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/tracking/waybillNo");
+        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/tracking/$waybillNO");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_HEADER, FALSE);
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             "Content-Type: application/json",
             "Accept: application/json",
-            "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
+            "Authorization: Basic $token"
         ));
 
         $response = curl_exec($ch);
@@ -476,7 +604,11 @@ class ParcelNinja{
 
         var_dump($response);
     }
-    public static function retrieveOrderTypes(){
+
+    /**
+     * @param $token
+     */
+    public static function retrieveOrderTypes($token){
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/lookups/getOrderTypes");
@@ -486,7 +618,7 @@ class ParcelNinja{
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             "Content-Type: application/json",
             "Accept: application/json",
-            "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
+            "Authorization: Basic $token"
         ));
 
         $response = curl_exec($ch);
@@ -494,17 +626,22 @@ class ParcelNinja{
 
         var_dump($response);
     }
-    public static function retrieveEventStatuses(){
+
+    /**
+     * @param $token
+     * @param $typeID
+     */
+    public static function retrieveEventStatuses($token, $typeID){
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/lookups/getEventTypes/?typeId=1");
+        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/lookups/getEventTypes/?typeId=$typeID");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_HEADER, FALSE);
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             "Content-Type: application/json",
             "Accept: application/json",
-            "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
+            "Authorization: Basic $token"
         ));
 
         $response = curl_exec($ch);
@@ -512,17 +649,22 @@ class ParcelNinja{
 
         var_dump($response);
     }
-    public static function retrieveSuburbsAndPostalAddresses(){
+
+    /**
+     * @param $token
+     * @param $search
+     */
+    public static function retrieveSuburbsAndPostalAddresses($token, $search){
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/lookups/getSuburbs/?search=Sandton");
+        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/lookups/getSuburbs/?search=$search");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_HEADER, FALSE);
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             "Content-Type: application/json",
             "Accept: application/json",
-            "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
+            "Authorization: Basic $token"
         ));
 
         $response = curl_exec($ch);
@@ -530,17 +672,22 @@ class ParcelNinja{
 
         var_dump($response);
     }
-    public static function retrieveAWebHook(){
+
+    /**
+     * @param $token
+     * @param $logID
+     */
+    public static function retrieveAWebHook($token, $logID){
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/logs/logid");
+        curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/logs/$logID");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_HEADER, FALSE);
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             "Content-Type: application/json",
             "Accept: application/json",
-            "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
+            "Authorization: Basic $token"
         ));
 
         $response = curl_exec($ch);
@@ -548,7 +695,12 @@ class ParcelNinja{
 
 
     }
-    public static function createCallBackWebHook(){
+
+    /**
+     * @param $token
+     * @param $hookURL
+     */
+    public static function createCallBackWebHook($token, $hookURL){
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/hooks/postCallback");
@@ -558,13 +710,13 @@ class ParcelNinja{
         curl_setopt($ch, CURLOPT_POST, TRUE);
 
         curl_setopt($ch, CURLOPT_POSTFIELDS, "{
-        \"hookUrl\": \"http://www.example.com/\"
+        \"hookUrl\": \"$hookURL\"
         }");
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             "Content-Type: application/json",
             "Accept: application/json",
-            "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
+            "Authorization: Basic $token"
         ));
 
         $response = curl_exec($ch);
@@ -572,7 +724,11 @@ class ParcelNinja{
 
         var_dump($response);
     }
-    public static function retrieveCallBackUrl(){
+
+    /**
+     * @param $token
+     */
+    public static function retrieveCallBackUrl($token){
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/hooks/getCallback");
@@ -582,7 +738,7 @@ class ParcelNinja{
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             "Content-Type: application/json",
             "Accept: application/json",
-            "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
+            "Authorization: Basic $token"
         ));
 
         $response = curl_exec($ch);
@@ -590,7 +746,14 @@ class ParcelNinja{
 
         var_dump($response);
     }
-    public static function getDeliveryEstimationByDims(){
+
+    /**
+     * @param $token
+     * @param $postalCode
+     * @param $suburb
+     * @param $items // in the format  [{"lengthMM": 100,"widthMM": 100,"heightMM": 100,"weightGrams": 500},{"lengthMM": 100,"widthMM": 100,"heightMM": 100,"weightGrams": 500},{"lengthMM": 100,"widthMM": 100,"heightMM": 100,"weightGrams": 500}]
+     */
+    public static function getDeliveryEstimationByDims($token, $postalCode, $suburb, $items){
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/deliveryquote/dims/options");
@@ -600,34 +763,15 @@ class ParcelNinja{
         curl_setopt($ch, CURLOPT_POST, TRUE);
 
         curl_setopt($ch, CURLOPT_POSTFIELDS, "{
-        \"postalCode\": \"2196\",
-        \"suburb\": \"Bryanston\",
-        \"items\": [
-        {
-        \"lengthMM\": 100,
-        \"widthMM\": 100,
-        \"heightMM\": 100,
-        \"weightGrams\": 500
-        },
-        {
-        \"lengthMM\": 100,
-        \"widthMM\": 300,
-        \"heightMM\": 100,
-        \"weightGrams\": 800
-        },
-        {
-        \"lengthMM\": 100,
-        \"widthMM\": 100,
-        \"heightMM\": 100,
-        \"weightGrams\": 100
-        }
-        ]
+        \"postalCode\": \"$postalCode\",
+        \"suburb\": \"$suburb\",
+        \"items\": $items
         }");
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             "Content-Type: application/json",
             "Accept: application/json",
-            "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
+            "Authorization: Basic $token"
         ));
 
         $response = curl_exec($ch);
@@ -635,7 +779,14 @@ class ParcelNinja{
 
         var_dump($response);
     }
-    public static function getDeliveryQuoteBySKU(){
+
+    /**
+     * @param $token
+     * @param $postalCode
+     * @param $suburb
+     * @param $items //in the format [{"itemNo": "452519SSFM-100-M","qty": 2}]
+     */
+    public static function getDeliveryQuoteBySKU($token, $postalCode, $suburb, $items){
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, "https://private-anon-253ada42ff-parcelninja.apiary-mock.com/api/v1/deliveryquote/sku/options");
@@ -645,20 +796,15 @@ class ParcelNinja{
         curl_setopt($ch, CURLOPT_POST, TRUE);
 
         curl_setopt($ch, CURLOPT_POSTFIELDS, "{
-        \"postalCode\": \"2196\",
-        \"suburb\": \"Bryanston\",
-        \"items\": [
-        {
-        \"itemNo\": \"452519SSFM-100-M\",
-        \"qty\": 2
-        }
-        ]
+        \"postalCode\": \"$postalCode\",
+        \"suburb\": \"$suburb\",
+        \"items\": $items
         }");
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             "Content-Type: application/json",
             "Accept: application/json",
-            "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
+            "Authorization: Basic $token"
         ));
 
         $response = curl_exec($ch);
